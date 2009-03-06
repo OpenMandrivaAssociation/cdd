@@ -19,6 +19,8 @@ Patch0:		cdd-g++4.2.patch
 
 BuildRequires:	libgmp-devel
 
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
+
 %description
 The program cdd is a C implementation of the Double Description
 Method of Motzkin et al. for generating all vertices (i.e. extreme points)
