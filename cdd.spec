@@ -9,7 +9,7 @@ Group:		Sciences/Mathematics
 License:	GPL
 Summary:	Implementation of the Double Description Method of Motzkin et al
 Version:	%{cdd_version}
-Release:	%mkrel 1
+Release:	%mkrel 2
 Source0:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cdd-061a.tar.gz
 Source1:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cdd+-077a.tar.gz
 Source2:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlib-094f.tar.gz
