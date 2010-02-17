@@ -9,13 +9,15 @@ Group:		Sciences/Mathematics
 License:	GPL
 Summary:	Implementation of the Double Description Method of Motzkin et al
 Version:	%{cdd_version}
-Release:	%mkrel 2
+Release:	%mkrel 3
 Source0:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cdd-061a.tar.gz
 Source1:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cdd+-077a.tar.gz
 Source2:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlib-094f.tar.gz
+Source3:	cdd_both_reps.c
 URL:		http://www.ifor.math.ethz.ch/~fukuda/cdd_home/index.html
 
 Patch0:		cdd-g++4.2.patch
+Patch1:		cdd-sagemath.patch
 
 BuildRequires:	libgmp-devel
 
@@ -81,10 +83,18 @@ and 0 is the m-vector of all zeros.
 %prep
 %setup -q -D -c cdd -a0 -a1 -a2
 
+pushd cddlib-094f
+  cp %{SOURCE3} src
+  cd src-gmp
+  ln -sf ../src/cdd_both_reps.c .
+popd
+
 %patch0	-p1
+%patch1	-p1
 
 %build
 pushd cddlib-094f
+  autoreconf -ifs
   %configure --bindir=%{cdddir}/bin --includedir=%{_includedir}/%{name}
   %make gmpdir=%{_prefix}
 popd
@@ -109,23 +119,25 @@ popd
 ########################################################################
 %install
 rm -rf %{buildroot}
+
+mkdir -p %{buildroot}/%{cdddir}/bin
+
 pushd cddlib-094f
   %makeinstall_std
-  mkdir -p %{buildroot}/%{_docdir}/%{name}
+  mkdir -p %{buildroot}/%{_docdir}/%{name} %{buildroot}/%{cdddir}/bin
+  cp -fa src/cdd_both_reps src-gmp/cdd_both_reps_gmp 
   cp -fa doc/cddlibman.{dvi,pdf,ps} %{buildroot}/%{_docdir}/%{name}
   cp -fa examples{,-ext,-ine{,3d}}/ %{buildroot}/%{cdddir}
   cp -fa README %{buildroot}/%{_docdir}/%{name}/README.cddlib
 popd
 
 pushd cdd-061
-  mkdir -p %{buildroot}/%{cdddir}/bin
   cp -fa cdd dplex_test utility/{delaunay,rlp,voronoi} %{buildroot}/%{cdddir}/bin
   cp -far ext/ ine/ %{buildroot}/%{cdddir}
   cp -fa cdd.readme %{buildroot}/%{_docdir}/%{name}
 popd
 
 pushd cdd+-077a
-  mkdir -p %{buildroot}/%{cdddir}/bin
   cp -fa cddf+ cddr+ get_essential %{buildroot}/%{cdddir}/bin
   # Several files are duplicated from cdd-061
   cp -far ext/* %{buildroot}/%{cdddir}/ext
@@ -142,6 +154,8 @@ rm -rf %{buildroot}
 %dir %{cdddir}
 %dir %{cdddir}/bin
 %{cdddir}/bin/cdd
+%{cdddir}/bin/cdd_both_reps
+%{cdddir}/bin/cdd_both_reps_gmp
 %{cdddir}/bin/dplex_test
 %{cdddir}/bin/delaunay
 %{cdddir}/bin/rlp
