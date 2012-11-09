@@ -1,0 +1,38 @@
+diff -p -up cdd-0.61a/cdd+-077a/gmp_init.cc.orig cdd-0.61a/cdd+-077a/gmp_init.cc
+--- cdd-0.61a/cdd+-077a/gmp_init.cc.orig	2009-03-05 19:46:18.000000000 -0300
++++ cdd-0.61a/cdd+-077a/gmp_init.cc	2009-03-05 19:46:26.000000000 -0300
+@@ -18,6 +18,8 @@
+ #include <memory>
+ #include "gmp_init.h"
+ 
++#include <string.h>
++
+ #if defined(__GNUC__)
+ #if __GNUC__==3 && __GNUC_MINOR__==3
+ namespace {
+diff -p -up cdd-0.61a/cdd+-077a/Integer.h.orig cdd-0.61a/cdd+-077a/Integer.h
+--- cdd-0.61a/cdd+-077a/Integer.h.orig	2009-03-05 19:42:50.000000000 -0300
++++ cdd-0.61a/cdd+-077a/Integer.h	2009-03-05 19:43:02.000000000 -0300
+@@ -776,8 +776,8 @@ template <>
+ struct numeric_limits<Integer> : numeric_limits<long> {
+    static double min() throw() { return -numeric_limits<double>::infinity(); }
+    static double max() throw() { return +numeric_limits<double>::infinity(); }
+-   static const int digits=INT_MAX;
+-   static const int digits10=INT_MAX;
++   static const int digits=__INT_MAX__;
++   static const int digits10=__INT_MAX__;
+    static const bool is_bounded=false;
+ };
+ 
+diff -p -up cdd-0.61a/cdd+-077a/Rational.h.orig cdd-0.61a/cdd+-077a/Rational.h
+--- cdd-0.61a/cdd+-077a/Rational.h.orig	2009-03-05 19:43:57.000000000 -0300
++++ cdd-0.61a/cdd+-077a/Rational.h	2009-03-05 19:45:35.000000000 -0300
+@@ -18,6 +18,8 @@
+ 
+ #include <Integer.h>
+ 
++#include <string.h>
++
+ #if __GNU_MP_VERSION < 4
+ #define _tmp_little_Integer(x) \
+    mpz_t x; \
