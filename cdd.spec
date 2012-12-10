@@ -9,7 +9,7 @@ Group:		Sciences/Mathematics
 License:	GPL
 Summary:	Implementation of the Double Description Method of Motzkin et al
 Version:	%{cdd_version}
-Release:	%mkrel 5
+Release:	5
 Source0:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cdd-061a.tar.gz
 Source1:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cdd+-077a.tar.gz
 Source2:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlib-094f.tar.gz
@@ -19,9 +19,7 @@ URL:		http://www.ifor.math.ethz.ch/~fukuda/cdd_home/index.html
 Patch0:		cdd-g++4.2.patch
 Patch1:		cdd-sagemath.patch
 
-BuildRequires:	libgmp-devel
-
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRequires:	gmp-devel
 
 %description
 The program cdd is a C implementation of the Double Description
@@ -118,8 +116,6 @@ popd
 
 ########################################################################
 %install
-rm -rf %{buildroot}
-
 mkdir -p %{buildroot}/%{cdddir}/bin
 
 pushd cddlib-094f
@@ -148,12 +144,8 @@ popd
 find %{buildroot} -type d -exec chmod a+x {} \;
 find %{buildroot} -type f -exec chmod a+r {} \;
 
-%clean
-rm -rf %{buildroot}
-
 ########################################################################
 %files
-%defattr(-,root,root,-)
 %dir %{cdddir}
 %dir %{cdddir}/bin
 %{cdddir}/bin/cdd
@@ -276,3 +268,29 @@ rm -rf %{buildroot}
 %{cdddir}/examples-ine3d/*
 %doc %{_docdir}/%{name}/cddlibman.*
 %doc %{_docdir}/%{name}/README.cddlib
+
+
+%changelog
+* Sun Dec 05 2010 Oden Eriksson <oeriksson@mandriva.com> 0.61a-5mdv2011.0
++ Revision: 610109
+- rebuild
+
+* Fri Feb 26 2010 Paulo Andrade <pcpa@mandriva.com.br> 0.61a-4mdv2010.1
++ Revision: 512086
++ rebuild (emptylog)
+
+* Wed Feb 17 2010 Paulo Andrade <pcpa@mandriva.com.br> 0.61a-3mdv2010.1
++ Revision: 507263
+- Add sagemath 4.3.2 changes
+
+* Thu Sep 10 2009 Thierry Vignaud <tv@mandriva.org> 0.61a-2mdv2010.0
++ Revision: 436958
+- rebuild
+
+* Fri Mar 06 2009 Paulo Andrade <pcpa@mandriva.com.br> 0.61a-1mdv2009.1
++ Revision: 350064
+- Initial import of cdd.
+  Implementation of the Double Description Method of Motzkin et al.
+  url: http://www.ifor.math.ethz.ch/~fukuda/cdd_home/index.html
+- cdd
+
