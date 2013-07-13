@@ -7,6 +7,7 @@ License:	GPLv2+
 Source0:	ftp://ftp.ifor.math.ethz.ch/pub/fukuda/cdd/cddlib-%{version}.tar.gz
 # Extracted from http://www.sagemath.org/packages/standard/cddlib-094f.p11.spkg
 Source1:        cdd_both_reps.c
+Source2:	%{name}.rpmlintrc
 URL:		http://www.ifor.math.ethz.ch/~fukuda/cdd_home/index.html
 # Patch from sagemath to build and test cdd_both_reps
 Patch0:         %{name}-sagemath.patch
