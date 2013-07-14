@@ -1,6 +1,6 @@
 Name:		cdd
 Version:	094g
-Release:	1
+Release:	2
 Summary:	A library for generating all vertices in convex polyhedrons
 Group:		Sciences/Mathematics
 License:	GPLv2+
@@ -56,6 +56,7 @@ and 0 is the m-vector of all zeros.
 %package	-n cddlib-devel
 Summary:	Headers for cddlib
 Group:		Development/C
+Requires:	cddlib = %{EVRD}
 
 %description	-n cddlib-devel
 Include files for cddlib.
