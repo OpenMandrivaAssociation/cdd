@@ -1,6 +1,6 @@
 Name:		cdd
 Version:	094g
-Release:	2
+Release:	3
 Summary:	A library for generating all vertices in convex polyhedrons
 Group:		Sciences/Mathematics
 License:	GPLv2+
