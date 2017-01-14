@@ -126,4 +126,3 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 %doc doc/cddlibman.pdf examples*
 %{_includedir}/cddlib
 %{_libdir}/*.so
-%{_libdir}/*.a
